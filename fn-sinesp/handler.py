@@ -1,6 +1,8 @@
 import json
-
+import warnings
 from sinesp_client import SinespClient
+
+warnings.simplefilter('ignore')
 
 SINESP_CALL = 'sinesp-call'
 
@@ -16,7 +18,6 @@ def handle(req):
         request_payload = package['payload']
         plate = request_payload['plate']
         result = sc.search(plate)
-        return json_result
         if request_type != SINESP_CALL:
             status_code = 500
             msg = 'Error!! The message header indicates other function call.' \
@@ -26,7 +27,7 @@ def handle(req):
         if not plate:
             status_code = 500
             msg = 'Error trying to get the SINESP plate!' \
-                    'Verify service to correct error'
+                  'Verify service to correct error'
             response = {'status_code': status_code, 'response_message': msg}
             return json.dumps(response)
     except Exception as e:
@@ -36,4 +37,4 @@ def handle(req):
         response = {'status_code': status_code, 'response_message': msg}
         return json.dumps(response)
     else:
-        return json.dumps({'status_code': 200, 'response': json_result})
+        return json.dumps({'status_code': 200, 'response': result}, ensure_ascii=False)
