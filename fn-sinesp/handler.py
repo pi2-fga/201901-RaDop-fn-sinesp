@@ -17,7 +17,7 @@ def handle(req):
         request_type = package['type']
         request_payload = package['payload']
         plate = request_payload['plate']
-        result = sc.search(plate)
+        
         if request_type != SINESP_CALL:
             status_code = 500
             msg = 'Error!! The message header indicates other function call.' \
@@ -30,6 +30,7 @@ def handle(req):
                   'Verify service to correct error'
             response = {'status_code': status_code, 'response_message': msg}
             return json.dumps(response)
+        result = sc.search(plate)
     except Exception as e:
         status_code = 500
         msg = f'Unknown error while trying to execute the SINESP service' \
