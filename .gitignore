@@ -1,4 +1,10 @@
+# Ignoring Open FaaS files
 template
 build
 
+# Ignorind dev files
 model.json
+
+# Ignoring test files
+fn-sinesp/__pycache__/
+fn-sinesp/**/__pycache__/
