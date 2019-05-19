@@ -1,5 +1,9 @@
 # FN-SINESP
 
+[![Build Status](https://travis-ci.org/radar-pi/fn-sinesp.svg?branch=develop)](https://travis-ci.org/radar-pi/fn-sinesp)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4616194d10b706ff4bf8/maintainability)](https://codeclimate.com/github/radar-pi/fn-sinesp/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4616194d10b706ff4bf8/test_coverage)](https://codeclimate.com/github/radar-pi/fn-sinesp/test_coverage)
+
 A **Função SINESP** é a função responsável por avaliar junto com o banco de dados do SINESP a situação de cada veículo. Dado o modelo de dados enviado o serviço irá pesquisar junto ao dados do SINESP informação cadastrais, assim como situação, restrições, ano, modelo, cor e outras informações sobre o veículo indicado.
 
 ## Parâmetros
