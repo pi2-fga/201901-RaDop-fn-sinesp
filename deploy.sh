@@ -7,3 +7,5 @@
 curl -sSL https://cli.openfaas.com | sudo sh
 
 faas-cli -f fn-sinesp.yml build
+
+faas-cli -f fn-sinesp.yml push

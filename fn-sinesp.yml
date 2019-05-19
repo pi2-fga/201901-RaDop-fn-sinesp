@@ -5,4 +5,4 @@ functions:
   fn-sinesp:
     lang: python3
     handler: ./fn-sinesp
-    image: fn-sinesp:latest
+    image: radop/fn-sinesp:latest
