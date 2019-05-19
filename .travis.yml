@@ -3,17 +3,30 @@ sudo: required
 language: python
 python:
   - "3.7"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=4d83fe12103da4f8e590d32b72a0685b5d426085f2d29c292769e555d7f5eb6c
 services:
   - docker
 before_install:
   - pip install -U pip
   - pip install -q -r fn-sinesp/requirements.txt
 before_script:
-  - flake8 fn-sinesp/
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
+  - flake8 fn-sinesp/
   - pytest
+  - coverage run -m pytest
+  - echo $DOCKERHUB_PASS | docker login --username $DOCKERHUB_USER --password-stdin
+after_script:
+  - py.test --cov=fn-sinesp --cov-report xml fn-sinesp/
+  - cp docs/coverage.xml .
+  - ./cc-test-reporter after-build -p $(pwd) --exit-code $TRAVIS_TEST_RESULT -t coverage.py
 deploy:
   provider: script
   script: bash deploy.sh
+  skip_cleanup: true
   on:
     branch: develop
